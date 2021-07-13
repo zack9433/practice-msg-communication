@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      window.addEventListener('load', () => {
+        const frameChannel = new BroadcastChannel('webapp')
+        frameChannel.onmessage = (e) => {
+          console.log('main -> frame', e.data);
+          frameChannel.postMessage('[frame]: pong!');
+        };
+      });
+    </script>
+  </head>
+  <body>
+  
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      let portToMain;
+
+      window.addEventListener('message', (e) => {
+        if (e.ports && e.ports.length > 0) {
+          portToMain = e.ports[0];
+          console.log('main -> frame', e.data);
+          portToMain.postMessage('[frame]: OK!')
+          portToMain.onmessage = (e) => {
+            console.log('main -> frame', e.data);
+            portToMain.postMessage('[frame]: pong!')
+          }
+        }
+      })
+    </script>
+  </head>
+  <body>
+  
+  </body>
+</html>
+

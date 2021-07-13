@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+    /*
+      window.addEventListener('load', () => {
+        window.parent.postMessage('Hey! message from iframe', 'http://localhost:8080');
+      }, false);
+      */
+
+      window.addEventListener('message', (e) => {
+        console.log('main -> frame', e.data);
+        e.source.postMessage('[frame]: pong!', e.origin);
+      }, false);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+

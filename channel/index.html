@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+      window.addEventListener('load', () => {
+        const channel = new MessageChannel();
+        const portToFrame = channel.port1;
+        const iframElm = document.querySelector('iframe');
+
+        portToFrame.onmessage = (e) => {
+          console.log('frame -> main', e.data);
+          setTimeout(() => {
+            portToFrame.postMessage('[main]: ping!')
+          }, 2000)
+        };
+
+        iframElm.contentWindow.postMessage('Start to communicate', '*', [channel.port2]);
+      }, false);
+    </script>
+  </head>
+  <body>
+    <main>
+        <iframe src="http://localhost:8081/iframe.html"></iframe>
+      </main>  
+  </body>
+</html>
